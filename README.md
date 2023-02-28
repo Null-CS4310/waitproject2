@@ -1,5 +1,9 @@
 About {#mainpage}
 =====
+TEAM NAME: NULL
+NAMES: Tadeh Khajatourians and Angela Semerjian
+YOUTUBE VIDEO LINK: https://www.youtube.com/watch?v=I7ZeC0tlb9s
+
 
 FreeNOS (Free Niek's Operating System) is an experimental microkernel based
 operating system for learning purposes written in C++. You may use the code
