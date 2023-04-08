@@ -1,3 +1,7 @@
+1. NAMES: Tadeh Khajatourians and Angela Semerjian
+2. BRANCH NAME: "priority"
+3. YOUTUBE LINK TO VIDEO: https://www.youtube.com/watch?v=eyfJPkfLpWU
+
 About {#mainpage}
 =====
 
