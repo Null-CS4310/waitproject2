@@ -61,7 +61,7 @@ class Process
     };
 
     /**
-     * Represents the execution state of the Process
+     * Represents the execution state of the Prmocess
      */
     enum State
     {
@@ -125,6 +125,20 @@ class Process
      * @return Current status of the Process.
      */
     State getState() const;
+    
+    /**
+     * Get current process priority.
+     * 
+     * @return Priority of the Process.
+    */
+    u8 getPriority();
+
+    /**
+     * Set a process's priority level.
+     * 
+     * @param newPriority Priority to change the process to.
+    */
+    void setPriority(u8 newPriority);
 
     /**
      * Get MMU memory context.
@@ -251,6 +265,9 @@ class Process
 
     /** Current process status. */
     State m_state;
+
+    /** Current process priority level */
+    u8 m_priority;
 
     /** Waits for exit of this Process. */
     ProcessID m_waitId;

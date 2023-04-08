@@ -115,10 +115,10 @@ typedef u16 BITWISE le16;
 typedef u16 BITWISE be16;
 
 /** Unsigned 8-bit little endian number. */
-typedef u8  BITWISE le8;
+typedef u8 BITWISE le8;
 
 /** Unsigned 8-bit big endian number. */
-typedef u8  BITWISE be8;
+typedef u8 BITWISE be8;
 
 /**
  * @}
@@ -149,8 +149,7 @@ typedef struct DeviceID
 
     /** Device specific minor ID number. */
     u16 minor;
-}
-DeviceID;
+} DeviceID;
 
 /**
  * Error code defined in Error.h
@@ -169,16 +168,15 @@ namespace Number
     {
         Dec, /** Decimal: 0-10 */
         Hex, /** Hexadecimal: 0x0-0xf */
-    }
-    Base;
+    } Base;
 };
 
 #endif /* __cplusplus */
 
-/**
- * @}
- * @}
- */
+    /**
+     * @}
+     * @}
+     */
 
 #endif /* __ASSEMBLER__ */
 #endif /* __TYPES_H */

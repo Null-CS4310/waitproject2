@@ -52,5 +52,6 @@ Sleep::Result Sleep::exec()
     }
 
     // Done
+    printf("\nFinished sleeping for %d seconds.\n", sec);
     return Success;
 }

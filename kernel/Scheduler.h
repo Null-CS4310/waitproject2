@@ -35,62 +35,63 @@
  */
 class Scheduler
 {
-  public:
+public:
+  /**
+   * Result code
+   */
+  enum Result
+  {
+    Success,
+    InvalidArgument
+  };
 
-    /**
-     * Result code
-     */
-    enum Result
-    {
-        Success,
-        InvalidArgument
-    };
+public:
+  /**
+   * Constructor function.
+   */
+  Scheduler();
 
-  public:
+  /**
+   * Get number of processes on the schedule
+   *
+   * @return Number of processes on the schedule
+   */
+  Size count() const;
 
-    /**
-     * Constructor function.
-     */
-    Scheduler();
+  /**
+   * Add a Process to the run schedule.
+   *
+   * @param proc Process pointer
+   * @param ignoreState True to not check for the Process state prior to dequeue.
+   *
+   * @return Result code
+   */
+  Result enqueue(Process *proc, bool ignoreState);
 
-    /**
-     * Get number of processes on the schedule
-     *
-     * @return Number of processes on the schedule
-     */
-    Size count() const;
+  /**
+   * Remove a Process from the run schedule.
+   *
+   * @param proc Process pointer
+   * @param ignoreState True to not check for the Process state prior to dequeue.
+   *
+   * @return Result code
+   */
+  Result dequeue(Process *proc, bool ignoreState);
 
-    /**
-     * Add a Process to the run schedule.
-     *
-     * @param proc Process pointer
-     * @param ignoreState True to not check for the Process state prior to dequeue.
-     *
-     * @return Result code
-     */
-    Result enqueue(Process *proc, bool ignoreState);
+  /**
+   * Select the next process to run.
+   *
+   * @return Process pointer or NULL if no matching process found
+   */
+  Process *select();
 
-    /**
-     * Remove a Process from the run schedule.
-     *
-     * @param proc Process pointer
-     * @param ignoreState True to not check for the Process state prior to dequeue.
-     *
-     * @return Result code
-     */
-    Result dequeue(Process *proc, bool ignoreState);
-
-    /**
-     * Select the next process to run.
-     *
-     * @return Process pointer or NULL if no matching process found
-     */
-    Process * select();
-
-  private:
-
-    /** Contains processes ready to run */
-    Queue<Process *, MAX_PROCS> m_queue;
+private:
+  /** Contains process ready to run of specific priority*/
+  Queue<Process *, MAX_PROCS / 5> p1_queue;
+  Queue<Process *, MAX_PROCS / 5> p2_queue;
+  Queue<Process *, MAX_PROCS / 5> p3_queue;
+  Queue<Process *, MAX_PROCS / 5> p4_queue;
+  Queue<Process *, MAX_PROCS / 5> p5_queue;
 };
 
 /**

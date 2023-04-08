@@ -38,96 +38,101 @@
  */
 class ProcessClient
 {
-  public:
+public:
+  /** Maximum number of processes */
+  static const Size MaximumProcesses = MAX_PROCS;
 
-    /** Maximum number of processes */
-    static const Size MaximumProcesses = MAX_PROCS;
+  /**
+   * Result codes
+   */
+  enum Result
+  {
+    Success,
+    NotFound,
+    IOError
+  };
 
-    /**
-     * Result codes
-     */
-    enum Result
-    {
-        Success,
-        NotFound,
-        IOError
-    };
+  /**
+   * Process information
+   */
+  typedef struct Info
+  {
+    /** Process state retrieved from the kernel */
+    ProcessInfo kernelState;
 
-    /**
-     * Process information
-     */
-    typedef struct Info
-    {
-        /** Process state retrieved from the kernel */
-        ProcessInfo kernelState;
+    /** Full command including program path */
+    String command;
 
-        /** Full command including program path */
-        String command;
+    /** Textual state of the process */
+    String textState;
 
-        /** Textual state of the process */
-        String textState;
-    }
-    Info;
+    u8 priority;
+  } Info;
 
-  public:
+public:
+  /**
+   * Get current process identifier
+   *
+   * @return Current Process ID
+   */
+  ProcessID getProcessID() const;
 
-    /**
-     * Get current process identifier
-     *
-     * @return Current Process ID
-     */
-    ProcessID getProcessID() const;
+  /**
+   * Get parent process identifier
+   *
+   * @return Parent Process ID
+   */
+  ProcessID getParentID() const;
 
-    /**
-     * Get parent process identifier
-     *
-     * @return Parent Process ID
-     */
-    ProcessID getParentID() const;
+  u8 getPriority() const;
 
-    /**
-     * Get process information by its ID.
-     *
-     * @param pid Process identifier of the process.
-     * @param info Process information output
-     *
-     * @return Result code
-     */
-    Result processInfo(const ProcessID pid, Info &info) const;
+  void changePriority(ProcessID pid, ProcessClient::Info &info, u8 newPriority);
 
-    /**
-     * Get process information by its program name
-     *
-     * Returns the information for the first process
-     * that is running the given program.
-     *
-     * @param program Path to the program
-     * @param info Process information output
-     *
-     * @return Result code
-     */
-    Result processInfo(const String program, Info &info) const;
+  /**
+   * Get process information by its ID.
+   *
+   * @param pid Process identifier of the process.
+   * @param info Process information output
+   *
+   * @return Result code
+   */
+  Result processInfo(const ProcessID pid, Info &info) const;
 
-    /**
-     * Find a process by its program name.
-     *
-     * Returns the information for the first process
-     * that is running the given program.
-     *
-     * @param program Path to the program
-     *
-     * @return ProcessID of the first process that matches
-     *         or ANY if none found.
-     */
-    ProcessID findProcess(const String program) const;
+  /**
+   * Get process information by its program name
+   *
+   * Returns the information for the first process
+   * that is running the given program.
+   *
+   * @param program Path to the program
+   * @param info Process information output
+   *
+   * @return Result code
+   */
+  Result processInfo(const String program, Info &info) const;
 
-  private:
+  /**
+   * Find a process by its program name.
+   *
+   * Returns the information for the first process
+   * that is running the given program.
+   *
+   * @param program Path to the program
+   *
+   * @return ProcessID of the first process that matches
+   *         or ANY if none found.
+   */
+  ProcessID findProcess(const String program) const;
 
-    /** Our own process identifier */
-    static const ProcessID m_pid;
+private:
+  /** Our own process identifier */
+  static const ProcessID m_pid;
 
-    /** Our parent process identifier */
-    static const ProcessID m_parent;
+  /** Our parent process identifier */
+  static const ProcessID m_parent;
+
+  /** Process priority*/
+  static const u8 m_priority;
 };
 
 /**
